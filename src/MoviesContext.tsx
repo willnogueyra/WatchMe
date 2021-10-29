@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState, useCallback } from "react";
 import { api } from "./services/api";
 
 interface GenreResponseProps {
@@ -32,7 +32,7 @@ interface MoviesContextData {
 
 const MoviesContext = createContext<MoviesContextData>({} as MoviesContextData);
 
-export function MoviesProvider({children}:MovieProviderProps) {
+export function MoviesProvider({children}: MovieProviderProps) {
   const [selectedGenreId, setSelectedGenreId] = useState(1);
 
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
@@ -56,9 +56,9 @@ export function MoviesProvider({children}:MovieProviderProps) {
     })
   }, [selectedGenreId]);
 
-  function handleClickButton(id: number) {
+  const handleClickButton = useCallback((id: number) => {
     setSelectedGenreId(id);
-  }
+  }, [])
 
   return (
     <MoviesContext.Provider value={{genres, selectedGenreId, selectedGenre, handleClickButton, movies}}>

@@ -1,5 +1,6 @@
 import { useMovies } from "../MoviesContext";
 import { Button } from "./Button";
+import {memo} from "react"
 
 export function SideBar() {
   const { genres, handleClickButton, selectedGenreId } = useMovies();
@@ -23,3 +24,5 @@ export function SideBar() {
     </nav>
   );
 }
+
+export default memo(SideBar)

@@ -1,5 +1,6 @@
 import { useMovies } from "../MoviesContext";
 import { MovieCard } from "./MovieCard";
+import {memo} from "react"
 
 export function Content() {
   const { selectedGenre, movies} = useMovies();
@@ -20,3 +21,5 @@ export function Content() {
     </div>
   );
 }
+
+export default memo(Content)
